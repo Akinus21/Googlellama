@@ -206,3 +206,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Google API credentials
+#  These files are used to authenticate with Google APIs and should not be shared publicly.
+#  They are typically stored in a secure location and loaded at runtime.
+#  If you are using Google APIs, ensure these files are not committed to version control.
+credentials.json
+token.json
