@@ -1,6 +1,4 @@
-
 from pathlib import Path
-import pathlib
 import tomllib
 import toml
 
@@ -11,21 +9,15 @@ APP_ENTRYPOINT = "supreme_research_mcp"
 def find_project_root(start_path: Path) -> Path:
     """Search upward from start_path to find the project root containing pyproject.toml."""
     for parent in [start_path] + list(start_path.parents):
-        if (parent / "pyproject.toml").is_file():
+        if (parent / "pyproject.toml").exists():
             return parent
-    raise FileNotFoundError("Could not find pyproject.toml in any parent directory.  Start path: {start_path}")
+    raise FileNotFoundError(
+        f"Could not find pyproject.toml in any parent directory. Start path: {start_path}"
+    )
 
 # ------------------- Define the project root directory -------------------
-PROJECT_ROOT = find_project_root(Path.cwd())
+PROJECT_ROOT = find_project_root(Path(__file__).resolve())
 # -------------------------------------------------------------------------
-
-def find_pyproject():
-    cwd = pathlib.Path.cwd()
-    for parent in [cwd] + list(cwd.parents):
-        candidate = parent / "pyproject.toml"
-        if candidate.is_file():
-            return candidate
-    return None
 
 # ------------------- Define the path to pyproject.toml -------------------
 PYPROJECT_PATH = PROJECT_ROOT / "pyproject.toml"
@@ -75,7 +67,7 @@ def find_repo_owner():
 
     except Exception as e:
         print(f"Warning: Could not parse repository info from pyproject.toml. Using fallback values. Error: {e}")
-        return "unknown_owner", "unknown_repo"
+        return "unknown_owner"
 
 # ------------------- Define repo information ------------------------------
 REPO_OWNER = find_repo_owner()

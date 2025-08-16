@@ -1,5 +1,5 @@
 import base64
-from akinus_utils.logger import local as log
+from akinus_utils.utils.logger  import log
 
 def base64_encode(text: str) -> str:
     """

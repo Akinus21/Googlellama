@@ -1,5 +1,5 @@
 import re
-from akinus_utils.logger import local as log
+from akinus_utils.utils.logger  import log
 
 def _split_words(text: str) -> list[str]:
     if not text:

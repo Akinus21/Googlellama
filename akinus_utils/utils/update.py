@@ -9,9 +9,9 @@ import zipfile
 from pathlib import Path
 from packaging import version
 import platform
-from akinus_utils.notify import notify
-from akinus_utils.logger import local as log
-from akinus_utils.app_details import PYPROJECT_PATH, APP_ENTRYPOINT, REPO_OWNER, PROJECT_ROOT, APP_NAME, APP_VERSION
+from akinus_utils.utils.notify import notify
+from akinus_utils.utils.logger  import log
+from akinus_utils.utils.app_details import PYPROJECT_PATH, APP_ENTRYPOINT, REPO_OWNER, PROJECT_ROOT, APP_NAME, APP_VERSION
 
 if PYPROJECT_PATH is None:
     raise FileNotFoundError("Could not find pyproject.toml in current or parent dirs")

@@ -1,6 +1,6 @@
-from akinus_utils.logger import local as log
-from akinus_utils.transform.case import sentence as sentence_case
-from akinus_utils.transform.case import title as title_case
+from akinus_utils.utils.logger  import log
+from akinus_utils.transform.case.sentence import sentence as sentence_case
+from akinus_utils.transform.case.title import title as title_case
 
 async def apa(data: dict) -> str:
     """
@@ -27,12 +27,12 @@ async def apa(data: dict) -> str:
     
     try:
         # Convert to sentence case only if needed
-        if raw_title and raw_title != sentence_case(raw_title):
-            title = sentence_case(raw_title)
+        if raw_title and raw_title != await sentence_case(raw_title):
+            title = await sentence_case(raw_title)
         else:
             title = raw_title
     except Exception as e:
-        log("error", "academic.references.apa", f"Error formatting title: {e}")
+        await log("error", "academic.references.apa", f"Error formatting title -- {raw_title}: {e}")
         title = raw_title
 
     source = data.get("source", "")
@@ -41,7 +41,8 @@ async def apa(data: dict) -> str:
 
     for field in ["author", "year", "title"]:
         if not data.get(field):
-            log("warning", f"Missing '{field}' for APA reference.", "academic.references.apa")
+            print(f"Warning: Missing '{field}' for APA reference.")
+            # await log("warning", f"Missing '{field}' for APA reference.", "academic.references.apa")
 
     apa_ref = f"{author} ({year}). {title}."
     if source:
@@ -51,7 +52,8 @@ async def apa(data: dict) -> str:
     if url:
         apa_ref += f" {url}"
 
-    log("info", f"Generated APA reference: {apa_ref}", "academic.references.apa")
+    # await log("info", f"Generated APA reference: {apa_ref}", "academic.references.apa")
+    print(f"Generated APA reference: {apa_ref}")
     return apa_ref
 
 

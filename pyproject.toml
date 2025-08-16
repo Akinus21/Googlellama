@@ -16,11 +16,29 @@ dependencies = [
     "toml",
     "packaging",
     "win10toast; sys_platform == 'win32'",
+    "numpy>=2.2.6",
+    "ollama>=0.5.3",
+    "arxiv>=2.2.0",
+    "bs4>=0.0.2",
+    "dotenv>=0.9.9",
+    "nest-asyncio>=1.6.0",
+    "readability-lxml>=0.8.4.1",
+    "mcp>=1.13.0",
+    "stdlib-list>=0.11.1",
+    "google-api-python-client>=2.179.0",
+    "google-auth-httplib2>=0.2.0",
+    "google-auth-oauthlib>=1.2.2",
+    "pyppeteer>=2.0.0",
+    "pyppeteer-stealth>=2.7.4",
+    "fastapi>=0.116.1",
+    "0>=0.0.0",
 ]
 
 [project.scripts]
 Googlellama = "Googlellama.__main__:main"
-Googlellama_update = "Googlellama.akinus_utils.update:main"
+Googlellama_update = "Googlellama.akinus_utils.utils.update:main"
+Googlellama_install = "akinus_utils.utils.uv:install_project_dependencies"
+Googlellama_bootstrap = "akinus_utils.utils.bootstrap:bootstrap_dependencies"
 
 # Use setuptools package discovery here:
 [tool.setuptools.packages.find]

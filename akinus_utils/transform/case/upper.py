@@ -1,4 +1,4 @@
-from akinus_utils.logger import local as log
+from akinus_utils.utils.logger  import log
 
 def upper(text: str) -> str:
     """

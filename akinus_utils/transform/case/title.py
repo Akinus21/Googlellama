@@ -1,4 +1,4 @@
-from akinus_utils.logger import local as log
+from akinus_utils.utils.logger  import log
 import re
 
 def _split_words(text: str) -> list[str]:
@@ -13,7 +13,7 @@ def _split_words(text: str) -> list[str]:
         words = text.split()
     return [w.lower() for w in words]
 
-def title_case(text: str) -> str:
+def title(text: str) -> str:
     """
     Convert text to title case.
 

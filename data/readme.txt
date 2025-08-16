@@ -1,0 +1,1 @@
+Store your credentials.json in this folder. 

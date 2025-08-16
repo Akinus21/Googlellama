@@ -1,8 +1,12 @@
 
+from . import ai
 from . import transform
-from . import app_details
-from . import logger
-from . import notify
-from . import update
+from . import utils
+from . import web
 
-__all__ = ["transform", "app_details", "logger", "notify", "update"]
+__all__ = [
+    "ai",
+    "transform",
+    "utils",
+    "web",
+]

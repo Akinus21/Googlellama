@@ -2,8 +2,8 @@ import platform
 import sys
 import asyncio
 import subprocess
-from akinus_utils.logger import local as log
-from akinus_utils.app_details import APP_NAME
+from akinus_utils.utils.logger  import log
+from akinus_utils.utils.app_details import APP_NAME
 
 def notify(title: str, message: str):
     system = platform.system()
