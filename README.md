@@ -74,67 +74,6 @@ Googlellama --help
 
 Googlellama is intended for MCP integration, typically invoked via an LLM or script that interacts with MCP tools.
 
-### **Example 1: Clean up your inbox**
-
-```python
-import asyncio
-from Googlellama import google_tools
-
-asyncio.run(google_tools.clean_up_inbox())
-```
-
-- Cleans and deduplicates your filters.
-- Adds senders labeled 'Delete' to `delete_filter.txt`.
-- Deletes matching emails in batches.
-- Archives matching and read emails.
-
----
-
-### **Example 2: Send an email**
-
-```python
-await google_tools.gmail_send(
-    to="recipient@example.com",
-    subject="Hello from Googlellama",
-    body="This email was sent via MCP automation."
-)
-```
-
----
-
-### **Example 3: List upcoming calendar events**
-
-```python
-events = await google_tools.calendar_list(max_results=5)
-for event in events:
-    print(event['summary'], event['start']['dateTime'])
-```
-
----
-
-### **Example 4: Add a new contact**
-
-```python
-await google_tools.contacts_create_contact(
-    givenName="Alice",
-    familyName="Smith",
-    email="alice.smith@example.com"
-)
-```
-
----
-
-### **Example 5: Create a new task**
-
-```python
-await google_tools.tasks_add(
-    title="Finish MCP integration",
-    notes="Complete all Gmail and Calendar tools integration",
-    due="2025-08-31T17:00:00-04:00"
-)
-```
-
----
 
 ## **LLM / Prompt Integration**
 
