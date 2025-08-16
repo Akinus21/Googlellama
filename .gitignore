@@ -211,5 +211,4 @@ __marimo__/
 #  These files are used to authenticate with Google APIs and should not be shared publicly.
 #  They are typically stored in a secure location and loaded at runtime.
 #  If you are using Google APIs, ensure these files are not committed to version control.
-credentials.json
-token.json
+data
