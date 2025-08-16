@@ -3,7 +3,7 @@ requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "uv_base"
+name = "Googlellama"
 version = "0.1.0"
 authors = [
     {name = "Akinus21"}
@@ -19,8 +19,8 @@ dependencies = [
 ]
 
 [project.scripts]
-uv_base = "uv_base.__main__:main"
-uv_base_update = "uv_base.akinus_utils.update:main"
+Googlellama = "Googlellama.__main__:main"
+Googlellama_update = "Googlellama.akinus_utils.update:main"
 
 # Use setuptools package discovery here:
 [tool.setuptools.packages.find]

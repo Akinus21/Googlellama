@@ -1,4 +1,4 @@
-# uv_base
+# Googlellama
 Base template for a simple Python project using [uv](https://docs.astral.sh/uv/).
 
 ## Description
@@ -10,9 +10,9 @@ A simple CLI example that runs instantly after cloning, or can be installed glob
 Clone the repository and run the project directly with `uv`:
 
 ```bash
-git clone https://github.com/YOURNAME/uv_base.git
-cd uv_base
-uv run uv_base
+git clone https://github.com/YOURNAME/Googlellama.git
+cd Googlellama
+uv run Googlellama
 ```
 This will:
 
@@ -20,24 +20,24 @@ Create an isolated virtual environment in .venv (if it doesn’t already exist)
 
 Install any dependencies from pyproject.toml
 
-Run the uv_base CLI
+Run the Googlellama CLI
 
 🌍 Install Globally
 If you want to use the CLI anywhere on your system without uv run:
 
 ```bash
-git clone https://github.com/YOURNAME/uv_base.git
-cd uv_base
+git clone https://github.com/YOURNAME/Googlellama.git
+cd Googlellama
 uv pip install .
 ```
 Then run:
 
 ```bash
-uv_base
+Googlellama
 ```
 from any directory.
 
 🗑️ Uninstall
 ```bash
-uv pip uninstall uv_base
+uv pip uninstall Googlellama
 ```
