@@ -7,10 +7,10 @@ import asyncio
 from pathlib import Path
 import traceback
 from typing import Optional, List
-from akinus.utils.web.server.mcp import mcp
-from akinus.utils.utils.logger import log
-from akinus.utils.web.utils.retry import retry_async
-from akinus.utils.web.google.auth import get_credentials
+from akinus.web.server.mcp import mcp
+from akinus.utils.logger import log
+from akinus.web.utils.retry import retry_async
+from akinus.web.google.auth import get_credentials
 
 from googleapiclient.discovery import build
 import io
@@ -29,7 +29,7 @@ warnings.filterwarnings("ignore", message="file_cache is only supported with oau
 import logging
 logging.getLogger('googleapiclient.discovery_cache').setLevel(logging.ERROR)
 
-from akinus.utils.utils.app_details import PROJECT_ROOT, PYPROJECT_PATH, app_name
+from akinus.utils.app_details import PROJECT_ROOT, PYPROJECT_PATH, app_name
 
 ALL_SCOPES = dotenv.dotenv_values(PROJECT_ROOT / ".env").get("ALL_SCOPES", "").split(",")
 GMAIL_SCOPES = dotenv.dotenv_values(PROJECT_ROOT / ".env").get("GMAIL_SCOPES", "").split(",")
@@ -131,15 +131,22 @@ async def get_filter_string(filename="delete_filter.txt"):
     return lines or []
 
 async def add_to_filter_string(text: str, filename="delete_filter.txt"):
+    _, email = parseaddr(text)
+    if not email:
+        return
+    email = email.lower().strip()
+
     service = get_drive_service()
     file_id = await get_drive_file_id(service, filename)
     lines = await read_drive_file(service, file_id)
-    if text in lines:
-        await log("INFO", "google_tools", f"Sender {text} already in filter list ({filename}).")
+
+    if email in lines:
+        await log("INFO", "google_tools", f"Sender {email} already in filter list ({filename}).")
         return
-    lines.append(text)
+
+    lines.append(email)
     await write_drive_file(service, file_id, lines)
-    await log("INFO", "google_tools", f"Added to filter ({filename}): {text}")
+    await log("INFO", "google_tools", f"Added to filter ({filename}): {email}")
 
 async def remove_from_filter_string(text: str, filename="delete_filter.txt"):
     service = get_drive_service()
@@ -217,9 +224,12 @@ async def add_if_labeled_delete():
                 headers = meta.get("payload", {}).get("headers", [])
                 sender = next((h["value"] for h in headers if h["name"].lower() == "from"), None)
                 if sender:
-                    await add_to_delete_filter_string(sender)
-                    await log("INFO", "google_tools", f"Added sender {sender} to filter list for message {m['id']}")
-                    count += 1
+                    _, email = parseaddr(sender)
+                    if email:
+                        email = email.lower().strip()
+                        await add_to_delete_filter_string(email)
+                        await log("INFO", "google_tools", f"Added sender {email} to filter list for message {m['id']}")
+                        count += 1
             except Exception as e:
                 log("ERROR", "google_tools", f"Error processing message {m['id']}: {e}")
                 continue
@@ -272,9 +282,12 @@ async def add_if_labeled_archive():
                 headers = meta.get("payload", {}).get("headers", [])
                 sender = next((h["value"] for h in headers if h["name"].lower() == "from"), None)
                 if sender:
-                    await add_to_archive_filter_string(sender)
-                    log("INFO", "google_tools", f"Added sender {sender} to filter list for archive label, message {m['id']}")
-                    count += 1
+                    _, email = parseaddr(sender)
+                    if email:
+                        email = email.lower().strip()
+                        await add_to_delete_filter_string(email)
+                        await log("INFO", "google_tools", f"Added sender {email} to filter list for message {m['id']}")
+                        count += 1
             except Exception as e:
                 log("ERROR", "google_tools", f"Error processing archive-labeled message {m['id']}: {e}")
                 continue

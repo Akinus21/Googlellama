@@ -32,13 +32,15 @@ dependencies = [
     "pyppeteer-stealth>=2.7.4",
     "fastapi>=0.116.1",
     "0>=0.0.0",
+    "newspaper3k>=0.2.8",
+    "trafilatura>=2.0.0",
 ]
 
 [project.scripts]
 Googlellama = "Googlellama.__main__:main"
-Googlellama_update = "Googlellama.akinus.utils.utils.update:main"
-Googlellama_install = "akinus.utils.utils.uv:install_project_dependencies"
-Googlellama_bootstrap = "akinus.utils.utils.bootstrap:bootstrap_dependencies"
+Googlellama_update = "Googlellama.akinus.utils.update:main"
+Googlellama_install = "akinus.utils.uv:install_project_dependencies"
+Googlellama_bootstrap = "akinus.utils.bootstrap:bootstrap_dependencies"
 
 # Use setuptools package discovery here:
 [tool.setuptools.packages.find]

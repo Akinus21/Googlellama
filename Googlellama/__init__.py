@@ -1,5 +1,5 @@
 try:
-    from akinus.utils.utils.bootstrap import bootstrap_dependencies
+    from akinus.utils.bootstrap import bootstrap_dependencies
     bootstrap_dependencies()
 except Exception as e:
     print(f"[BOOTSTRAP ERROR] {e}")
