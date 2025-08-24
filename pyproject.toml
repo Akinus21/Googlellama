@@ -36,9 +36,9 @@ dependencies = [
 
 [project.scripts]
 Googlellama = "Googlellama.__main__:main"
-Googlellama_update = "Googlellama.akinus_utils.utils.update:main"
-Googlellama_install = "akinus_utils.utils.uv:install_project_dependencies"
-Googlellama_bootstrap = "akinus_utils.utils.bootstrap:bootstrap_dependencies"
+Googlellama_update = "Googlellama.akinus.utils.utils.update:main"
+Googlellama_install = "akinus.utils.utils.uv:install_project_dependencies"
+Googlellama_bootstrap = "akinus.utils.utils.bootstrap:bootstrap_dependencies"
 
 # Use setuptools package discovery here:
 [tool.setuptools.packages.find]

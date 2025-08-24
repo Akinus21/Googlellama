@@ -7,10 +7,10 @@ import asyncio
 from pathlib import Path
 import traceback
 from typing import Optional, List
-from akinus_utils.web.server.mcp import mcp
-from akinus_utils.utils.logger import log
-from akinus_utils.web.utils.retry import retry_async
-from akinus_utils.web.google.auth import get_credentials
+from akinus.utils.web.server.mcp import mcp
+from akinus.utils.utils.logger import log
+from akinus.utils.web.utils.retry import retry_async
+from akinus.utils.web.google.auth import get_credentials
 
 from googleapiclient.discovery import build
 import io
@@ -29,7 +29,7 @@ warnings.filterwarnings("ignore", message="file_cache is only supported with oau
 import logging
 logging.getLogger('googleapiclient.discovery_cache').setLevel(logging.ERROR)
 
-from akinus_utils.utils.app_details import PROJECT_ROOT, PYPROJECT_PATH, app_name
+from akinus.utils.utils.app_details import PROJECT_ROOT, PYPROJECT_PATH, app_name
 
 ALL_SCOPES = dotenv.dotenv_values(PROJECT_ROOT / ".env").get("ALL_SCOPES", "").split(",")
 GMAIL_SCOPES = dotenv.dotenv_values(PROJECT_ROOT / ".env").get("GMAIL_SCOPES", "").split(",")

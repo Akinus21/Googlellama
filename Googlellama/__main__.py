@@ -3,8 +3,8 @@ import sys
 import inspect
 import argparse
 import asyncio
-from akinus_utils.web.server.mcp import mcp
-from akinus_utils.web.google.auth import get_credentials
+from akinus.web.server.mcp import mcp
+from akinus.web.google.auth import get_credentials
 
 import Googlellama.tools as google_tools
 
@@ -49,7 +49,7 @@ def main():
         creds = get_credentials()  # This will refresh or re-authorize if needed
     except FileNotFoundError:
         # Token file missing, force authorization
-        from akinus_utils.web.google.auth import authorize
+        from akinus.web.google.auth import authorize
         authorize()
         creds = get_credentials()
 
