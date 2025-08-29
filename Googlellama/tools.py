@@ -256,6 +256,9 @@ async def add_if_labeled_archive():
     if not archive_label_id:
         log("ERROR", "google_tools", "Archive label not found in Gmail account.")
         return {"status": "error", "message": "Archive label not found."}
+    
+    # Load the delete filter list once
+    delete_filter = set(await get_filter_string("delete_filter.txt"))
 
     count = 0
     next_page_token = None
@@ -285,7 +288,13 @@ async def add_if_labeled_archive():
                     _, email = parseaddr(sender)
                     if email:
                         email = email.lower().strip()
-                        await add_to_delete_filter_string(email)
+
+                        if email in delete_filter:
+                            await remove_from_delete_filter_string(email)
+                            delete_filter.remove(email)  # So we don't try again
+
+
+                        await add_to_archive_filter_string(email)
                         await log("INFO", "google_tools", f"Added sender {email} to filter list for message {m['id']}")
                         count += 1
             except Exception as e:
@@ -406,8 +415,12 @@ async def clean_up_inbox():
     - Archiving all emails matching archive_filter.txt in batched queries
     - Archiving all read emails in the inbox
     """
+    # Must be done first, to remove "Save" addresses from delete file if they exist
+    await add_if_labeled_archive()
 
+    # Run second
     await add_if_labeled_delete()
+    
 
     delete_senders = await get_filter_string("delete_filter.txt")
     archive_senders = await get_filter_string("archive_filter.txt")
